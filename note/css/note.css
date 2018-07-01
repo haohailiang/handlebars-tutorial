@@ -158,4 +158,40 @@ li {
 }
 .chapterdiv .subtitle {
 	font-size: 16px;
+	text-indent: 40px;
+	line-height: 30px;
 }
+.chapterdiv .time, .chapterdiv .type {
+	font-size: 12px;
+}
+.chapterdiv a {
+	text-decoration: none;
+}
+.notediv .noteul {
+	width:98%;
+	margin:20px auto;
+}
+.notediv .btn {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

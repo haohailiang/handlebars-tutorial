@@ -1,5 +1,6 @@
 // 获取课程列表
 var GETCLASSES = 'http://imoocnote.calfnote.com/inter/getClasses.php';
+var GETCLASSCHAPTER = 'http://imoocnote.calfnote.com/inter/getClassChapter.php';
 
 
 $.ajaxSetup({
@@ -21,6 +22,30 @@ function refreshClasses(curPage) {
 		renderTemplate('#class-template', data['data'], '#classes');
 		renderTemplate('#pag-template', formatPag(data), '#pag');
 	});
+}
+
+$("#classes").on("click", "li", function(){
+	$this = $(this);
+	var cid = $this.data('id');
+	$.getJSON(GETCLASSCHAPTER, {cid: cid}, function(data) {
+		console.log( data );
+		renderTemplate('#chapter-template', data, '#chapterdiv');
+	});
+	showNote(true);
+});
+
+$('.overlap').on('click', function() {
+	showNote(false);
+});
+
+function showNote(show) {
+	if(show) {
+		$('.overlap').css('display', 'block');
+		$('.notedetail').css('display', 'block');
+	} else {
+		$('.overlap').css('display', 'none');
+		$('.notedetail').css('display', 'none');
+	}
 }
 
 $.getJSON(GETCLASSES, {curPage:2}, function(data){
@@ -47,6 +72,10 @@ Handlebars.registerHelper('long', function(v, options) {
 	} else {
 		return options.inverse(this)
 	}
+})
+
+Handlebars.registerHelper('addone', function(v) {
+	return v+1;
 })
 
 Handlebars.registerHelper('pag', function(v1, v2) {
