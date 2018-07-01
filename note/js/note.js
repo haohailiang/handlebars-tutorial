@@ -18,7 +18,7 @@ function renderTemplate(templateSelector, data, htmlSelector) {
 }
 
 function refreshClasses(curPage) {
-	$.getJSON(GETCLASSES, {curPage:curPage}, function(data){
+	$.getJSON(config['GETCLASSES'], {curPage:curPage}, function(data){
 		renderTemplate('#class-template', data['data'], '#classes');
 		renderTemplate('#pag-template', formatPag(data), '#pag');
 	});
@@ -37,8 +37,8 @@ $("#classes").on("click", "li", function(){
 	// 	renderTemplate('#note-template', data, '#notediv');
 	// });
 	$.when(
-		$.getJSON(GETCLASSCHAPTER, {cid:cid}),
-		$.getJSON(GETCLASSNOTE, {cid: 1})
+		$.getJSON(config['GETCLASSCHAPTER'], {cid:cid}),
+		$.getJSON(config['GETCLASSNOTE'], {cid: 1})
 	).done(function(cData, nData) {
 		console.log( cData );
 		console.log( nData );
@@ -62,7 +62,8 @@ function showNote(show) {
 	}
 }
 
-$.getJSON(GETCLASSES, {curPage:2}, function(data){
+// 初始化默认显示第二页的数据
+$.getJSON(config['GETCLASSES'], {curPage:2}, function(data){
 	renderTemplate('#class-template', data['data'], '#classes');
 	renderTemplate('#pag-template', formatPag(data), '#pag');
 });
