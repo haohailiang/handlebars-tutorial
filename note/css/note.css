@@ -114,4 +114,48 @@ li {
 	left: 0;
 	top: 0;
 	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.5;
+	display: none;
+}
+.notedetail {
+	position: fixed;
+	left: 10%;
+	width: 80%;
+	top: 10%;
+	height: 80%;
+	min-width: 800px;
+	background-color: white;
+	box-shadow: 0 0 200px #F7FF00;
+	display: none;
+}
+.chapterdiv, .notediv {
+	width: 48%;
+	height: 100%;
+	float: left;
+	overflow: auto;
+}
+.notemiddle {
+	width: 4%;
+	height: 100%;
+	float: left;
+	background: url(../imgs/note.jpg) repeat-y;
+	background-size: 100% 5%;
+}
+.chapterdiv {
+	background-color: #E8E8FF;
+}
+.notediv {
+	background-color: #FFE3E5;
+}
+.chapterdiv .titleul {
+	width: 80%;
+	margin:20px auto;
+}
+.chapterdiv .title {
+	font-size: 20px;
+}
+.chapterdiv .subtitle {
+	font-size: 16px;
 }
