@@ -128,7 +128,6 @@ function formatPag(pagData) {
 		toRight.clickable = true;
 	}
 	arr.push(toRight);
-	console.log( arr );
 	return arr;
 }
 

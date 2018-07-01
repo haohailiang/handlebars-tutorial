@@ -16,9 +16,21 @@ function renderTemplate(templateSelector, data, htmlSelector) {
 	$(htmlSelector).html(h);
 }
 
+function refreshClasses(curPage) {
+	$.getJSON(GETCLASSES, {curPage:curPage}, function(data){
+		renderTemplate('#class-template', data['data'], '#classes');
+		renderTemplate('#pag-template', formatPag(data), '#pag');
+	});
+}
+
 $.getJSON(GETCLASSES, {curPage:2}, function(data){
 	renderTemplate('#class-template', data['data'], '#classes');
 	renderTemplate('#pag-template', formatPag(data), '#pag');
+});
+
+$("#pag").on("click", "li.clickable", function(){
+	$this = $(this);
+	refreshClasses($this.data('id'));
 });
 
 Handlebars.registerHelper('equal', function(v1, v2, options) {

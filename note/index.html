@@ -14,18 +14,7 @@
 </div>
 <div class="classes" id="classes"></div>
 
-<div class="pag" id="pag">
-	<ul>
-		<li class="cur">1</li>
-		<li class="clickable">2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>6</li>
-		<li>7</li>
-		<li>8</li>
-	</ul>
-</div>
+<div class="pag" id="pag"></div>
 
 <script src="./js/jquery-1.9.1.min.js"></script>
 <script src="./js/handlebars-v4.0.11.js"></script>
@@ -51,7 +40,7 @@
 <script id="pag-template" type="text/x-handlebars-template">
 	<ul>
 		{{#each this}}
-		<li {{#if cur}} class="cur"{{/if}}
+		<li data-id={{index}} {{#if cur}} class="cur"{{/if}}
 			{{#if clickable}} class="clickable" {{/if}}>
 			{{{ text }}}
 		</li>
