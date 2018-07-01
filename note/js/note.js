@@ -1,7 +1,7 @@
 // 获取课程列表
 var GETCLASSES = 'http://imoocnote.calfnote.com/inter/getClasses.php';
 var GETCLASSCHAPTER = 'http://imoocnote.calfnote.com/inter/getClassChapter.php';
-
+var GETCLASSNOTE = 'http://imoocnote.calfnote.com/inter/getClassNote.php';
 
 $.ajaxSetup({
 	error: function() {
@@ -27,11 +27,25 @@ function refreshClasses(curPage) {
 $("#classes").on("click", "li", function(){
 	$this = $(this);
 	var cid = $this.data('id');
-	$.getJSON(GETCLASSCHAPTER, {cid: cid}, function(data) {
-		console.log( data );
-		renderTemplate('#chapter-template', data, '#chapterdiv');
-	});
-	showNote(true);
+	// $.getJSON(GETCLASSCHAPTER, {cid: cid}, function(data) {
+	// 	renderTemplate('#chapter-template', data, '#chapterdiv');
+	// 	showNote(true);
+	// });
+	// $.getJSON(GETCLASSNOTE, {cid: 1}, function(data) {
+	// 	// TODO
+	// 	console.log( data );
+	// 	renderTemplate('#note-template', data, '#notediv');
+	// });
+	$.when(
+		$.getJSON(GETCLASSCHAPTER, {cid:cid}),
+		$.getJSON(GETCLASSNOTE, {cid: 1})
+	).done(function(cData, nData) {
+		console.log( cData );
+		console.log( nData );
+		renderTemplate('#chapter-template', cData[0], '#chapterdiv');
+		renderTemplate('#note-template', nData[0], '#notediv');
+		showNote(true);
+	})
 });
 
 $('.overlap').on('click', function() {
@@ -76,6 +90,22 @@ Handlebars.registerHelper('long', function(v, options) {
 
 Handlebars.registerHelper('addone', function(v) {
 	return v+1;
+})
+
+// 格式化日期
+Handlebars.registerHelper('formatDate', function(value) {
+	if(!value) {
+		return "";
+	}
+	var d      = new Date(value);
+	var year   = d.getFullYear();
+	var month  = d.getMonth() + 1;
+	var date   = d.getDate();
+	var hour   = d.getHours();
+	var minute = d.getMinutes();
+	var second = d.getSeconds();
+	var str    = year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
+	return str
 })
 
 Handlebars.registerHelper('pag', function(v1, v2) {

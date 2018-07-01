@@ -21,7 +21,7 @@
 <div class="notedetail">
 	<div class="chapterdiv" id="chapterdiv"></div>
 	<div class="notemiddle"></div>
-	<div class="notediv"></div>
+	<div class="notediv" id="notediv"></div>
 </div>
 
 <script src="./js/jquery-1.9.1.min.js"></script>
@@ -68,9 +68,26 @@
 					{{#if timespan}}
 					<span class="time">({{timespan}})</span>
 					{{/if}}
+					{{#equal titletype 'code'}}
+						<span class="type">{编程}</span>
+					{{else}}
+						{{#equal titletype 'ceping'}}
+						<span class="type">(练习)</span>
+						{{/equal}}
+					{{/equal}}
 				</li>
 				{{/each}}
 			</ul>
+		</li>
+		{{/each}}
+	</ul>
+</script>
+<script id="note-template" type="text/x-handlebars-template">
+	<ul class="noteul">
+		{{#each this}}
+		<li>
+			<div class="time"{{formatDate notetime}}</div>
+			<div class="content">{{{content}}}</div>
 		</li>
 		{{/each}}
 	</ul>
